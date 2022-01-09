@@ -1,0 +1,402 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+#table {
+  height: 100%;
+  width: calc(100% / 3 * 2);
+  border-collapse: collapse;
+  box-sizing: border-box;
+  table-layout: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-top: 0;
+}
+
+#calendar-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  border: 1px solid lightgray;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+}
+
+.row .cell {
+  flex: 1;
+  border: 1px solid lightgray;
+}
+
+#table-controls {
+  display: flex;
+}
+
+#table-controls div {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+#weekdays {
+  display: flex;
+}
+
+#weekdays div {
+  background-color: lightseagreen;
+  color: white;
+  flex: 1;
+  text-align: center;
+}
+
+.cell.today {
+  background-color: lightseagreen;
+  color: white;
+}
+
+.cell:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.cell.today:hover {
+  background-color: rgb(35, 171, 164);
+}
+
+.cell-div {
+  padding: 5px;
+}
+
+.cell-events-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cell-event-div {
+  margin: 2px;
+  width: calc(100vw / 15);
+  border-radius: 2px;
+  padding: 0px 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cell-event-div:hover {
+  filter: brightness(95%);
+}
+
+.cell-expand-events-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.cell-expand-events {
+  width: 30%;
+  text-align: center;
+  font-size: 14pt;
+  border-radius: 6px;
+  box-sizing: border-box;
+  border: 1px solid lightseagreen;
+  color: lightseagreen;
+  cursor: pointer;
+}
+
+.cell-expand-events:hover {
+  background-color: lightseagreen;
+  color: white;
+}
+
+.today .cell-expand-events {
+  border-color: white;
+  color: white;
+}
+
+.today .cell-expand-events:hover {
+  background-color: white;
+  color: lightseagreen;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  width: calc(100% / 3);
+  background-color: rgb(245, 245, 245);
+  border-left: 1px solid lightgray;
+}
+
+form {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+}
+
+form > input {
+  height: 1.5rem;
+}
+
+form > input,
+form > textarea,
+form > select {
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  outline-color: lightseagreen;
+}
+
+form > label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.btn {
+  width: 48%;
+  height: 3rem;
+  border-radius: 20px;
+  background-color: lightseagreen;
+  color: white;
+  border: 1px solid lightseagreen;
+  font-size: large;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.del-btn {
+  background-color: rgb(224, 0, 0);
+  border-color: rgb(224, 0, 0);
+}
+
+.del-btn:hover {
+  background-color: rgb(207, 0, 0);
+  border-color: rgb(207, 0, 0);
+}
+
+.add-btn:hover {
+  background-color: rgb(35, 171, 164);
+}
+
+#year-month {
+  font-size: 16pt;
+}
+
+#btn-prev,
+#btn-next {
+  cursor: pointer;
+  background-color: white;
+  font-size: 18pt;
+}
+
+#btn-prev:hover,
+#btn-next:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.meeting {
+  background-color: #ffbc0a;
+}
+
+.call {
+  background-color: #f4bfdb;
+}
+
+.out-of-office {
+  background-color: #d5e070;
+}
+
+section {
+  display: none;
+  padding-top: 2rem;
+  box-sizing: border-box;
+}
+
+section h2 {
+  font-size: 22pt;
+  margin-bottom: 2.5rem;
+}
+
+.show {
+  display: flex;
+}
+
+#event-details span {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+#event-details span + div {
+  min-height: 1.5rem;
+  border: 1px solid lightgray;
+  background-color: white;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  word-break: break-all;
+}
+
+textarea {
+  resize: none;
+}
+
+#modal {
+  display: none;
+  position: absolute;
+  border: 1px solid lightgray;
+  background: white;
+  border-radius: 8pt;
+  width: 20rem;
+  height: 20rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+#modal-overlay {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+}
+
+#modal-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background-color: lightseagreen;
+  color: white;
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  cursor: pointer;
+}
+
+#modal-close:hover {
+  background-color: rgb(35, 171, 164);
+}
+
+.modal-div {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.modal-event-div {
+  margin: 10px auto;
+  width: 70%;
+  border-radius: 2px;
+  padding: 5px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.modal-event-div:hover {
+  filter: brightness(95%);
+}
+
+#modal.show-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#modal-overlay.show-overlay {
+  display: block;
+}
+
+#modal-date {
+  font-weight: 700;
+  font-size: 14pt;
+  padding: 10px;
+}
+
+#confirm-message-div {
+  margin: auto;
+  padding: 0 2rem;
+  font-size: 18pt;
+  font-weight: 600;
+}
+
+#root-add-event-div {
+  display: none;
+  width: calc(100% / 3);
+}
+
+#root-add-event-div.show {
+  display: flex;
+  justify-content: center;
+}
+
+#root-add-event-button {
+  margin-top: 3rem;
+  width: 70%;
+  max-width: 25rem;
+}
+
+#root-add-event-button:hover {
+  background-color: rgb(35, 171, 164);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-btn {
+  background-color: white;
+  color: lightseagreen;
+  border-color: lightseagreen;
+}
+
+.close-btn:hover {
+  background-color: lightseagreen;
+  color: white;
+}
+
+.greyed-out {
+  color: lightgray;
+}
+
+@media (max-width: 1367px) {
+  .cell-expand-events-div {
+    margin-top: 0;
+  }
+
+  .cell-expand-events {
+    font-size: 10pt;
+  }
+}
+
+@media (max-width: 900px) {
+  .cell-event-div {
+    display: none;
+  }
+
+  .cell-expand-events {
+    width: 5vw;
+    height: 2rem;
+    background-color: lightseagreen;
+    color: white;
+  }
+
+  .cell-expand-events:hover {
+    background-color: rgb(35, 171, 164);
+  }
+}
