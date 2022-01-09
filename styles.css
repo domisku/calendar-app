@@ -8,9 +8,7 @@ body {
 #table {
   height: 100%;
   width: calc(100% / 3 * 2);
-  border-collapse: collapse;
   box-sizing: border-box;
-  table-layout: fixed;
   display: flex;
   flex-direction: column;
   padding: 10px;
